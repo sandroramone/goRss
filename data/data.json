@@ -16,5 +16,9 @@
         "site": "nbcnews",
         "link": "http://feeds.nbcnews.com/feeds/topstories",
         "type": "rss"
+    },{
+        "site": "Linux Descomplicado",
+        "link": "http://feeds.feedburner.com/LinuxDescomplicado?format=xml",
+        "type": "rss"
     }
 ]
