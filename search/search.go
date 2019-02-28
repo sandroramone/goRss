@@ -7,6 +7,7 @@ import (
 
 var matchers = make(map[string]Matcher)
 
+// Run is a function call search feeds
 func Run(searchTerm string) {
 	feeds, err := RetrieveFeeds()
 	if err != nil {
@@ -30,4 +31,22 @@ func Run(searchTerm string) {
 			waitGroup.Done()
 		}(matcher, feed)
 	}
+
+	go func() {
+		waitGroup.Wait()
+
+		close(results)
+	}()
+
+	Display(results)
+}
+
+// Register is a function regiter feed
+func Register(feedType string, matcher Matcher) {
+	if _, exists := matchers[feedType]; exists {
+		log.Fatalln(feedType, "Matcher already registered")
+	}
+
+	log.Println("Register", feedType, "matcher")
+	matchers[feedType] = matcher
 }
